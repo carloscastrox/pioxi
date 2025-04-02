@@ -10,28 +10,26 @@ if (isset($_POST['btn-reg']) && !empty($_POST)) {
     $insert->bindParam(4, $pass);
 
     /* Validation Data */
-    $search =  $conn->prepare('SELECT * FROM user WHERE email=:email');
+    $search = $conn->prepare('SELECT * FROM user WHERE email=:email');
     $search->execute(array(":email" => $_POST['email']));
     $search->fetch(PDO::FETCH_ASSOC);
 
-    if ($search->rowCount() > 0){
+    if ($search->rowCount() > 0) {
         $msg = array("Disculpa, el email ya existe", "danger");
-    }
+        }
 
-    /* Validation Data */
-
-    elseif ($insert->execute()) {
+    /* Validation Data */ elseif ($insert->execute()) {
         $msg = array("Usuario creado", "success");
         } else {
         $msg = array("Usuario no creado", "danger");
         }
     }
 
-    /* recuperación de contraseña de usuarios */
+/* recuperación de contraseña de usuarios */
 ?>
 
 <!DOCTYPE html>
-<html lang="es-CO" data-bs-theme="dark" class="h-100">
+<html lang="es-CO" data-bs-theme="" class="h-100">
 
 <head>
     <meta charset="UTF-8">
@@ -60,9 +58,9 @@ if (isset($_POST['btn-reg']) && !empty($_POST)) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
-<body>
+<body class="bg-login">
     <main class="form-signin m-auto pt-5 mt-4">
-        <div class="card">
+        <div class="card" style="background-color:rgba(255, 255, 255, 0.1);">
             <div class="card-body">
                 <!--Section alerts-->
                 <?php if (isset($msg)) { ?>
@@ -78,6 +76,15 @@ if (isset($_POST['btn-reg']) && !empty($_POST)) {
                     <h1 class="display-6">Registro de Usuario</h1>
                 </div>
                 <form action="" method="post" enctype="application/x-www-form-urlencoded">
+
+                    <!--<div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-person-lines-fill"></i>
+                        </span>
+                        <input type="text" class="form-control" id="fname" placeholder="Ingrese sus nombres"
+                            name="fname" required>
+                    </div>-->
+
                     <div class="mb-3 mt-3">
                         <label for="fname" class="form-label">Nombres:</label>
                         <input type="text" class="form-control" id="fname" placeholder="Ingrese sus nombres"

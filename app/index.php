@@ -1,5 +1,30 @@
 <?php
+
+/* 
+Validación de sesión de usuarios
+
+ */
 include "conn.php";
+session_start();
+
+if (isset($_POST['btnlogin'])) {
+    $login = $conn->prepare("SELECT * FROM user WHERE email = ?");
+    $login->bindParam(1, $_POST['email']);
+    $login->execute();
+    $row = $login->fetch(PDO::FETCH_ASSOC);
+
+    if (is_array($row)) {
+        if (password_verify($_POST['pass'], $row['pass'])) {
+            $_SESSION['user'] = $row['email'];
+            $_SESSION['id'] = $row['iduser'];
+            header("Location: home");
+            } else {
+            $msg = array("Contraseña incorrecta","warning");
+            }
+        } else {
+            $msg = array("El correo no existe","danger");
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es-CO" data-bs-theme="dark" class="h-100">
@@ -34,6 +59,16 @@ include "conn.php";
     <main class="form-signin m-auto pt-5 mt-4">
         <div class="card">
             <div class="card-body">
+
+                <!--Section alerts-->
+                <?php if (isset($msg)) { ?>
+                    <div class="alert alert-<?php echo $msg[1] ?> alert-dismissible">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>Alerta!</strong> <?php echo $msg[0] ?>.
+                    </div>
+                <?php } ?>
+                <!--Section alerts-->
+
                 <div class="text-center">
                     <img src="../assets/img/logo.png" alt="Logo" width="72" height="72">
                     <h1 class="display-6">Inicio de Sesión</h1>
