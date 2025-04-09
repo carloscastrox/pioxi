@@ -1,8 +1,10 @@
 <?php
-
 /* 
-Validación de sesión de usuarios
-
+ * Validación de sesión de usuarios ok
+ * Seguridad de la aplicación en el home
+ * Menú modular para el home
+ * Validar si el usuario ya ha iniciado sesión
+ * Si la sesión existe, redirigir a la página de inicio
  */
 include "conn.php";
 session_start();
@@ -18,11 +20,12 @@ if (isset($_POST['btnlogin'])) {
             $_SESSION['user'] = $row['email'];
             $_SESSION['id'] = $row['iduser'];
             header("Location: home");
+            exit();
             } else {
-            $msg = array("Contraseña incorrecta","warning");
+            $msg = array("Contraseña incorrecta", "warning");
             }
         } else {
-            $msg = array("El correo no existe","danger");
+        $msg = array("El correo no existe", "danger");
         }
     }
 ?>
