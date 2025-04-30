@@ -18,7 +18,8 @@ if (isset($_POST['btn-reg']) && !empty($_POST)) {
         $msg = array("Disculpa, el email ya existe", "danger");
         }
 
-    /* Validation Data */ elseif ($insert->execute()) {
+    /* Validation Data */
+     elseif ($insert->execute()) {
         $msg = array("Usuario creado", "success");
         } else {
         $msg = array("Usuario no creado", "danger");

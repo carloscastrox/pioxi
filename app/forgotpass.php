@@ -1,5 +1,30 @@
 <?php
-include "conn.php";
+session_start();
+include 'conn.php';
+
+if (isset($_POST['btnrescue'])) {
+
+    $email = $_POST['email'];
+    $fpass = $conn->prepare('SELECT * FROM user WHERE email = ? LIMIT 1');
+    $fpass->bindParam(1, $email);
+    $fpass->execute();
+    $row = $fpass->fetch(PDO::FETCH_ASSOC);
+
+    if ($fpass->rowCount() == 1 ) {
+        $id = base64_encode($row['iduser']);
+        $token = md5(uniqid(rand()));
+
+        $uptoken = $conn->prepare('UPDATE user SET token = ? WHERE email = ?');
+        $uptoken->bindParam(1, $token);
+        $uptoken->bindParam(2, $email);
+        $uptoken->execute();
+
+        $subject = '=?UTF-8?B?'.base64_encode("Restablecer Contraseña"). "=?=";
+        $message = 'Hola Mundo, ya puedes restablecer la contraseña';
+
+        include 'config.mailer.php';
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -39,9 +64,17 @@ include "conn.php";
                     <img src="../assets/img/logo.png" alt="Logo" width="72" height="72">
                     <h1 class="display-6">Recuperar Contraseña</h1>
                 </div>
-                <div class="alert alert-warning" role="alert">
-                    Se enviara un link a su correo para restablecer la contraseña.
-                </div>
+                 <!--Alerts-->
+        <?php if (isset($msg)) { ?>
+          <div class="alert alert-<?php echo $msg[1]; ?> fade show" role="alert">
+            <strong>Success!</strong> <?php echo $msg[0]; ?>
+          </div>
+        <?php } else { ?>
+          <div class="alert alert-warning" role="alert">
+            Se enviara un link a su correo para restablecer su contraseña.
+          </div>
+        <?php } ?>
+        <!--Alerts-->
                 <form action="" method="post" enctype="application/x-www-form-urlencoded">
                     <div class="mb-3 mt-3">
                         <label for="email" class="form-label">Correo:</label>
@@ -49,7 +82,7 @@ include "conn.php";
                             required>
                     </div>
                     <div class="d-grid gap-2 mb-4">
-                        <button type="submit" class="btn btn-primary btn-block" name="btnlogin">Restablecer</button>
+                        <button type="submit" class="btn btn-primary btn-block" name="btnrescue">Restablecer</button>
                     </div>
 
                     <div class="row">
