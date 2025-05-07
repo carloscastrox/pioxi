@@ -10,7 +10,7 @@ if (isset($_POST['btnrescue'])) {
     $fpass->execute();
     $row = $fpass->fetch(PDO::FETCH_ASSOC);
 
-    if ($fpass->rowCount() == 1 ) {
+    if ($fpass->rowCount() == 1) {
         $id = base64_encode($row['iduser']);
         $token = md5(uniqid(rand()));
 
@@ -19,12 +19,16 @@ if (isset($_POST['btnrescue'])) {
         $uptoken->bindParam(2, $email);
         $uptoken->execute();
 
-        $subject = '=?UTF-8?B?'.base64_encode("Restablecer Contraseña"). "=?=";
-        $message = 'Hola Mundo, ya puedes restablecer la contraseña';
+        $subject = '=?UTF-8?B?' . base64_encode("Restablecer Contraseña") . "=?=";
+        $message = "<p>Hola " . $row['fname'] . ", ya puedes restablecer la contraseña</p><br>";
+        $message .= "<p>Por favor, haz click en el siguiente enlace para restablecer tu contraseña:</p>";
+        $message .= "<a href='http://localhost/11_25/pioxi/app/resetpass?id=$id&token=$token'>Restablecer</a>";
 
         include 'config.mailer.php';
+        } else {
+        $msg = array("El correo no existe", "danger");
+        }
     }
-}
 
 ?>
 <!DOCTYPE html>
@@ -64,17 +68,17 @@ if (isset($_POST['btnrescue'])) {
                     <img src="../assets/img/logo.png" alt="Logo" width="72" height="72">
                     <h1 class="display-6">Recuperar Contraseña</h1>
                 </div>
-                 <!--Alerts-->
-        <?php if (isset($msg)) { ?>
-          <div class="alert alert-<?php echo $msg[1]; ?> fade show" role="alert">
-            <strong>Success!</strong> <?php echo $msg[0]; ?>
-          </div>
-        <?php } else { ?>
-          <div class="alert alert-warning" role="alert">
-            Se enviara un link a su correo para restablecer su contraseña.
-          </div>
-        <?php } ?>
-        <!--Alerts-->
+                <!--Alerts-->
+                <?php if (isset($msg)) { ?>
+                    <div class="alert alert-<?php echo $msg[1]; ?> fade show" role="alert">
+                        <strong>Alerta!</strong> <?php echo $msg[0]; ?>
+                    </div>
+                <?php } else { ?>
+                    <div class="alert alert-warning" role="alert">
+                        Se enviara un link a su correo para restablecer su contraseña.
+                    </div>
+                <?php } ?>
+                <!--Alerts-->
                 <form action="" method="post" enctype="application/x-www-form-urlencoded">
                     <div class="mb-3 mt-3">
                         <label for="email" class="form-label">Correo:</label>
@@ -87,7 +91,7 @@ if (isset($_POST['btnrescue'])) {
 
                     <div class="row">
                         <div class="col-sm-6">
-                            <a href="reguser">Registráte como usuario</a>
+                            <a href="reguser">Registráte</a>
                         </div>
                         <div class="col-sm-6">
                             <a href="./">Iniciar Sesión</a>

@@ -77,18 +77,19 @@ if (isset($_POST['btnlogin'])) {
                     <h1 class="display-6">Inicio de Sesión</h1>
                 </div>
                 <form action="" method="post" enctype="application/x-www-form-urlencoded">
-                    <div class="mb-3 mt-3">
-                        <label for="email" class="form-label">Correo:</label>
-                        <input type="email" class="form-control" id="email" placeholder="Ingrese email" name="email"
+                    <div class="input-group mb-3 mt-3">
+                        <label for="email" class="input-group-text">Correo:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Ingrese su correo" name="email"
                             required>
                     </div>
-                    <div class="mb-3 password-wrapper">
-                        <label for="pwd" class="form-label">Contraseña:</label>
-                        <input type="password" class="form-control" id="password" placeholder="Ingrese contraseña"
+
+                    <div class="input-group mb-3 password-wrapper">
+                        <label for="pwd" class="input-group-text">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña"
                             name="pass" required>
-                        <span class="input-group pt-2 toggle-button eye-icon" onclick="password_show_hide();">
-                            <i class="bi bi-eye d-none" id="show_eye" style="font-size:20px"></i>
-                            <i class="bi bi-eye-slash" id="hide_eye" style="font-size:20px"></i>
+                        <span class="input-group-text pt-2 toggle-button eye-icon" onclick="password_show_hide();">
+                            <i class="bi bi-eye d-none" id="show_eye"></i>
+                            <i class="bi bi-eye-slash" id="hide_eye"></i>
                         </span>
                     </div>
                     <div class="form-check mb-3">
@@ -101,10 +102,10 @@ if (isset($_POST['btnlogin'])) {
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-6">
-                            <a href="reguser">Registráte como usuario</a>
+                        <div class="col-sm-4">
+                            <a href="reguser">Registráte</a>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-8 text-end">
                             <a href="forgotpass">¿Olvidaste la contraseña?</a>
                         </div>
                     </div>
