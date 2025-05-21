@@ -76,10 +76,10 @@ if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['rol']
             <main>
                 <?php
                 //Controlador de modulos o subpáginas
-                $page = isset($_GET['page']) ? strtolower($_GET['page']) : 'home';
+                $page = isset($_GET['page']) ? strtolower($_GET['page']) : 'homeu';
                 require_once './' . $page . '.php';
 
-                if ($page == 'home') {
+                if ($page == 'homeu') {
                     require_once 'init.php';
                     }
                 ?>

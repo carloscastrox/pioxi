@@ -20,9 +20,9 @@ if (isset($_POST['btnrescue'])) {
         $uptoken->execute();
 
         $subject = '=?UTF-8?B?' . base64_encode("Restablecer Contraseña") . "=?=";
-        $message = "<p>Hola " . $row['fname'] . ", ya puedes restablecer la contraseña</p><br>";
-        $message .= "<p>Por favor, haz click en el siguiente enlace para restablecer tu contraseña:</p>";
-        $message .= "<a href='http://localhost/11_25/pioxi/app/resetpass?id=$id&token=$token'>Restablecer</a>";
+        $message = "<p>Hola " . $row['fname'] . ", ya puedes restablecer la contraseña</p><br>
+        <p>Por favor, haz click en el siguiente enlace para restablecer tu contraseña:</p>
+        <a href='http://localhost/11_25/pioxi/app/resetpass?id=$id&token=$token'>Restablecer</a>";
 
         include 'config.mailer.php';
         } else {

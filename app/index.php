@@ -1,10 +1,31 @@
 <?php
 /* 
+SESIONES
  * Validación de sesión de usuarios ok
- * Seguridad de la aplicación en el home
- * Menú modular para el home
- * Validar si el usuario ya ha iniciado sesión
- * Si la sesión existe, redirigir a la página de inicio
+ * Seguridad de la aplicación en el home ok
+ * 
+ MENU MODULAR
+ * Menú modular para el home ok
+ * Validar si el usuario ya ha iniciado sesión ok
+ * Si la sesión existe, redirigir a la página de inicio ok
+
+ ROLES
+* Validar a los usuarios por roles
+* Direccionar a los usuarios a la página de home según su rol (homea, homec, homev, etc) 
+* crear en la base de datos el campo rol y asignar el rol a cada usuario ok
+
+PERFIL 
+* Crear perfil de usuarios de acuerdo a su rol (Incluyendo imagen de perfil)
+* Formatear campo date en php
+* Actualizar los datos del perfil de usuario
+
+CRUD 
+* Imprimir datos en una tabla dinamica
+* Utilizando librerias datatables.net
+* Insertar datos a la tabla dinamica
+* Eliminar datos de la tabla dinamica
+* Actualizar datos de la tabla dinamica
+
  */
 include "conn.php";
 session_start();
@@ -17,17 +38,32 @@ if (isset($_POST['btnlogin'])) {
 
     if (is_array($row)) {
         if (password_verify($_POST['pass'], $row['pass'])) {
-            $_SESSION['user'] = $row['email'];
-            $_SESSION['id'] = $row['iduser'];
-            header("Location: home");
-            exit();
-            } else {
-            $msg = array("Contraseña incorrecta", "warning");
+            switch ($row['rol']) {
+                case 'admin':
+                    $_SESSION['user'] = $row['email'];
+                    $_SESSION['id'] = $row['iduser'];
+                    $_SESSION['rol'] = $row['rol'];
+                    header("Location: home");
+                    break;
+
+                case 'user':
+                    $_SESSION['user'] = $row['email'];
+                    $_SESSION['id'] = $row['iduser'];
+                    $_SESSION['rol'] = $row['rol'];
+                    header("Location: homeu");
+                    break;
+
+                default:
+                    header("Location: ./");
+                    break;
             }
         } else {
-        $msg = array("El correo no existe", "danger");
+            $msg = array("Contraseña incorrecta", "warning");
         }
+    } else {
+        $msg = array("El correo no existe", "danger");
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es-CO" data-bs-theme="dark" class="h-100">
