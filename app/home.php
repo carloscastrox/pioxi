@@ -67,6 +67,7 @@ if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['rol']
                                 </li>
                             </ul>
                             <div class="d-flex">
+                                <a href="?page=perfil" class="btn btn-danger">Mi Perfil</a>
                                 <a href="./logout" class="btn btn-primary">Salir</a>
                             </div>
                         </div>
