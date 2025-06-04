@@ -10,21 +10,24 @@ SESIONES
  * Si la sesión existe, redirigir a la página de inicio ok
 
  ROLES
-* Validar a los usuarios por roles
-* Direccionar a los usuarios a la página de home según su rol (homea, homec, homev, etc) 
+* Validar a los usuarios por roles ok
+* Direccionar a los usuarios a la página de home según su rol (homea, homec, homev, etc) ok
 * crear en la base de datos el campo rol y asignar el rol a cada usuario ok
 
 PERFIL 
-* Crear perfil de usuarios de acuerdo a su rol (Incluyendo imagen de perfil)
-* Formatear campo date en php
-* Actualizar los datos del perfil de usuario
+* Crear perfil de usuarios de acuerdo a su rol (Incluyendo imagen de perfil) OK
+* Formatear campo date en php OK
+* Actualizar los datos del perfil de usuario PENDIENTE
 
 CRUD 
-* Imprimir datos en una tabla dinamica
-* Utilizando librerias datatables.net
-* Insertar datos a la tabla dinamica
-* Eliminar datos de la tabla dinamica
-* Actualizar datos de la tabla dinamica
+* Crear tabla Utilizando librerias datatables.net(inicializar, Responsive, language) OK
+* Activar Botones de exportación a Excel y PDF
+* Imprimir datos en una tabla dinamica OK
+* Insertar datos a la tabla dinamica PENDIENTE
+* Eliminar datos de la tabla dinamica OK
+* Editar datos de la tabla dinamica PENDIENTE
+
+Consultas INNER JOIN
 
  */
 include "conn.php";

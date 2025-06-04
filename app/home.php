@@ -63,7 +63,7 @@ if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['rol']
                                     <a class="nav-link" href="?page=pubs">Publicaciones</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#team">Integrantes</a>
+                                    <a class="nav-link" href="?page=tableusers">Usuarios</a>
                                 </li>
                             </ul>
                             <div class="d-flex">
@@ -74,7 +74,7 @@ if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['rol']
                     </div>
                 </nav>
             </header>
-            <main>
+            <main class="container pt-5 mt-5">
                 <?php
                 //Controlador de modulos o subpáginas
                 $page = isset($_GET['page']) ? strtolower($_GET['page']) : 'home';
